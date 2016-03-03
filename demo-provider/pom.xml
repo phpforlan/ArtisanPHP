@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.weimob</groupId>
+	<artifactId>demo-provider-service</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+
+	<modules>
+		<module>demo-provider-interface</module>
+		<module>demo-provider-client</module>
+		<module>demo-provider-server</module>
+	</modules>
+	<properties>
+		<dubbo.version>2.5.5-weimob-SNAPSHOT</dubbo.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- 发布配置 -->
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://maven.weimob.com/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://maven.weimob.com/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

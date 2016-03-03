@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Copyright 1999-2011 Alibaba Group. - - Licensed under the Apache License, 
+	Version 2.0 (the "License"); - you may not use this file except in compliance 
+	with the License. - You may obtain a copy of the License at - - http://www.apache.org/licenses/LICENSE-2.0 
+	- - Unless required by applicable law or agreed to in writing, software - 
+	distributed under the License is distributed on an "AS IS" BASIS, - WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. - See the 
+	License for the specific language governing permissions and - limitations 
+	under the License. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 从wcc读取配置，暂时不需要进行屏蔽(为防止冲突WccPropertyPlaceholderConfigurer不需要定义ID) -->
+	<!-- <bean class="com.weimob.soa.configcenter.WccPropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>dubbo-common.properties</value>
+			</list>
+		</property>
+		<property name="applicationName" value="weimob.arch-common" />
+	</bean> -->
+
+	<!-- 本机服务dubbo 服务定义 -->
+	<!-- 提供方应用名称信息及负责人 -->
+	<dubbo:application name="my-firs-demo-test" owner="wangdongdong" />
+
+	<!-- 通用配置 -->
+	<!-- 使用zookeeper注册中心暴露服务地址 -->  
+   <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false" subscribe="false" register="true"></dubbo:registry>
+	<!-- 1、check：注册中心不存在时,是否报错
+		 2、subscribe：是否向此注册中心订阅服务，如果设为false，将只注册，不订阅。
+		 3、register：是否向此注册中心注册服务，如果设为false，将只订阅，不注册，默认true
+		 4、address	Zookeeper集群配置，地址可以多个以逗号隔开  -->
+	
+	<dubbo:provider retries="0" timeout="5000" threads="400"/>
+	<!-- 1、timeout注册中心请求超时时间(毫秒) -->
+	
+	<dubbo:service interface="com.weimob.demo.service.DemoService" ref="demoExportService" />
+	<!-- 1、interface：服务接口的路径
+		 2、ref：引用对应的实现类的Bean的ID -->
+
+</beans>

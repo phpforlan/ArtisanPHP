@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" 
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<bean id="demoExportService" class="com.weimob.demo.export.DemoExportService" autowire="byName">
+		<property name="demoFacadeService" ref="demoFacadeService" />
+	</bean>
+	
+	<bean id="demoFacadeService" class="com.weimob.demo.facade.DemoFacadeService" autowire="byName">
+		<property name="demoServiceImpl" ref="demoServiceImpl" />
+	</bean>
+	
+	<bean id="demoServiceImpl" class="com.weimob.demo.service.impl.DemoServiceImpl" autowire="byName">
+	</bean>
+	
+</beans>
